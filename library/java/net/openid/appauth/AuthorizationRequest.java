@@ -1254,7 +1254,7 @@ public class AuthorizationRequest implements AuthorizationManagementRequest {
     @NonNull
     public static AuthorizationRequest jsonDeserialize(@NonNull JSONObject json)
             throws JSONException {
-        checkNotNull(json, "json cannot be null");
+//        checkNotNull(json, "json cannot be null");
         return new AuthorizationRequest(
                 AuthorizationServiceConfiguration.fromJson(json.getJSONObject(KEY_CONFIGURATION)),
                 JsonUtil.getString(json, KEY_CLIENT_ID),

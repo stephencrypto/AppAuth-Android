@@ -263,7 +263,7 @@ public class AuthorizationManagementActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
         outState.putBoolean(KEY_AUTHORIZATION_STARTED, mAuthorizationStarted);
         outState.putParcelable(KEY_AUTH_INTENT, mAuthIntent);
-        outState.putString(KEY_AUTH_REQUEST, mAuthRequest.jsonSerializeString());
+//        outState.putString(KEY_AUTH_REQUEST, mAuthRequest.jsonSerializeString());
         outState.putString(KEY_AUTH_REQUEST_TYPE,
                 AuthorizationManagementUtil.requestTypeFor(mAuthRequest));
         outState.putParcelable(KEY_COMPLETE_INTENT, mCompleteIntent);
@@ -314,11 +314,12 @@ public class AuthorizationManagementActivity extends AppCompatActivity {
         mCompleteIntent = state.getParcelable(KEY_COMPLETE_INTENT);
         mCancelIntent = state.getParcelable(KEY_CANCEL_INTENT);
         try {
-            String authRequestJson = state.getString(KEY_AUTH_REQUEST, null);
+//            String authRequestJson = state.getString(KEY_AUTH_REQUEST, null);
             String authRequestType = state.getString(KEY_AUTH_REQUEST_TYPE, null);
-            mAuthRequest = authRequestJson != null
-                    ? AuthorizationManagementUtil.requestFrom(authRequestJson, authRequestType)
-                    : null;
+//            mAuthRequest = authRequestJson != null
+//                    ? AuthorizationManagementUtil.requestFrom(authRequestJson, authRequestType)
+//                    : null;
+            mAuthRequest = AuthorizationManagementUtil.requestFrom(null, authRequestType);
         } catch (JSONException ex) {
             sendResult(
                     mCancelIntent,
@@ -346,17 +347,17 @@ public class AuthorizationManagementActivity extends AppCompatActivity {
             AuthorizationManagementResponse response =
                     AuthorizationManagementUtil.responseWith(mAuthRequest, responseUri);
 
-            if (mAuthRequest.getState() == null && response.getState() != null
-                    || (mAuthRequest.getState() != null && !mAuthRequest.getState()
-                    .equals(response.getState()))) {
-
-                Logger.warn("State returned in authorization response (%s) does not match state "
-                        + "from request (%s) - discarding response",
-                        response.getState(),
-                        mAuthRequest.getState());
-
-                return AuthorizationRequestErrors.STATE_MISMATCH.toIntent();
-            }
+//            if (mAuthRequest.getState() == null && response.getState() != null
+//                    || (mAuthRequest.getState() != null && !mAuthRequest.getState()
+//                    .equals(response.getState()))) {
+//
+//                Logger.warn("State returned in authorization response (%s) does not match state "
+//                        + "from request (%s) - discarding response",
+//                        response.getState(),
+//                        mAuthRequest.getState());
+//
+//                return AuthorizationRequestErrors.STATE_MISMATCH.toIntent();
+//            }
 
             return response.toIntent();
         }

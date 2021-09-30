@@ -58,9 +58,9 @@ class AuthorizationManagementUtil {
      */
     static AuthorizationManagementRequest requestFrom(String jsonStr, String type)
             throws JSONException {
-        checkNotNull(jsonStr, "jsonStr can not be null");
+//        checkNotNull(jsonStr, "jsonStr can not be null");
 
-        JSONObject json = new JSONObject(jsonStr);
+        JSONObject json = new JSONObject();
         if (REQUEST_TYPE_AUTHORIZATION.equals(type)) {
             return AuthorizationRequest.jsonDeserialize(json);
         }
